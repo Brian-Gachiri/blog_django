@@ -1,0 +1,53 @@
+.btn-main{
+    color: white;
+    background-color: #00a878;
+}
+
+.btn-main:hover{
+    color: white;
+    background-color: #036d4f;
+}
+
+.btn-sec{
+    color: white;
+    background-color: #fe5e41;
+}
+
+.btn-sec:hover{
+    color: white;
+    background-color: #c93319;
+}
+
+.btn-black{
+    color:white;
+    background-color: #0b0500;
+}
+
+.btn-black:hover{
+    color:white;
+    background-color: #0b0500;
+}
+
+.bg-main{
+
+    background-color: #00a878;
+
+}
+
+.bg-raja{
+    background-color: #f3c178;
+}
+
+.text-raja{
+    color:#f3c178;
+}
+.text-sec{
+    color:#c93319;
+}
+.text-main{
+    color:#00a870;
+}
+.bg-black{
+    background-color: #0b0500;
+
+}

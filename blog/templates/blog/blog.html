@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+
+{% block 'content' %}
+
+<div class="container-fluid">
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-lg-8">
+
+             <!-- Custom rounded search bars with input group -->
+        <form action="">
+            <div class="p-1 bg-light rounded rounded-pill shadow mb-4">
+              <div class="input-group ">
+                <input type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                <div class="input-group-append">
+                  <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- End -->
+        </div>
+    </div>
+
+    <h4 class="text-center">My Blog Posts</h4>
+
+    <div class="row">
+        
+        {% include 'blog/simple-post.html' %}
+
+
+    </div>
+</div>
+
+
+{% endblock %}

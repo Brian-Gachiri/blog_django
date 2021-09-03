@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% block 'content' %}
+
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+
+        <div class="col-lg-5 col-md-5 col-sm-12 my-auto">
+
+            <small class="font-weight-bold">You've come to the right place.</small>
+            <h1 class="">Ever read a story that made you weep, laugh, both and cry
+                out for more?</h1>
+
+                <a class="btn btn-main btn-lg mt-3" href="#">Tell me more...</a>
+
+            
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 pb-5 px-4 my-auto">
+
+            <img src="{% static 'images/landing.svg' %}" class="img-fluid py-4 px-5">
+        </div>
+    </div>
+
+
+    <h3 class="text-center mt-5">Juicy Topics</h3>
+
+
+    <div class="row justify-content-center mb-5">
+
+        {% for service in services %}
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card bg-black  mt-1">
+                <div class="card-body text-center text-light">
+                    <p class="text-main"><i class="fa fa-ravelry fa-2x"></i></p>
+                    <p class="mx-5 mt-2">{{service}}</p>
+        
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+    <h3 class="text-center mt-5">Recent Posts</h3>
+
+    <div class="row">
+
+        
+        {% include 'blog/simple-post.html' %}
+        
+
+    </div>
+
+
+
+</div>
+
+
+
+{% endblock %}

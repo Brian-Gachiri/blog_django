@@ -1,0 +1,65 @@
+{% extends 'blog/base.html' %}
+
+{% block 'content' %}
+
+<div class="container-fluid">
+
+    <h3 class="text-center mt-3">Contact Me</h3>
+    
+    <div class="row justify-content-center mt-3">
+
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card bg-dark mt-1">
+                <div class="card-body text-center text-light">
+                    <p class=""><i class="fa fa-phone fa-2x"></i></p>
+                    <p class="mx-5 mb-5 mt-2">Number: {{number}}</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card bg-dark mt-1">
+                <div class="card-body text-center text-light">
+                    <p class=""><i class="fa fa-envelope fa-2x"></i></p>
+                    <p class="mx-5 mb-5 mt-2">{{email}}</p>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="card bg-dark mt-1">
+                <div class="card-body text-center text-light">
+                    <p class=""><i class="fa fa-map-marker fa-2x"></i></p>
+                    <p class="mx-5 mb-5 mt-2">{{address}}</p>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        
+    </div>
+
+    
+    <div class="row justify-content-center">
+
+        {% for service in services %}
+
+        {% include 'blog/services-component.html' %}
+
+        {% endfor %}
+
+
+        
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}
