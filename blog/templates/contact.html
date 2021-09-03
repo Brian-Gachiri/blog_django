@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% load static %}
+
 {% block 'content' %}
 
 <div class="container-fluid">
@@ -10,30 +12,30 @@
 
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="card bg-dark mt-1">
+            <div class="card bg-black mt-1">
                 <div class="card-body text-center text-light">
-                    <p class=""><i class="fa fa-phone fa-2x"></i></p>
-                    <p class="mx-5 mb-5 mt-2">Number: {{number}}</p>
+                    <p class="text-main"><i class="fa fa-phone fa-2x"></i></p>
+                    <p class="mx-3 mb-5 mt-2">Number: {{number}}</p>
 
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="card bg-dark mt-1">
+            <div class="card bg-black mt-1">
                 <div class="card-body text-center text-light">
-                    <p class=""><i class="fa fa-envelope fa-2x"></i></p>
-                    <p class="mx-5 mb-5 mt-2">{{email}}</p>
+                    <p class="text-main"><i class="fa fa-envelope fa-2x"></i></p>
+                    <p class="mx-3 mb-5 mt-2">{{email}}</p>
 
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4 col-md-4 col-sm-12">
-            <div class="card bg-dark mt-1">
+            <div class="card bg-black mt-1">
                 <div class="card-body text-center text-light">
-                    <p class=""><i class="fa fa-map-marker fa-2x"></i></p>
-                    <p class="mx-5 mb-5 mt-2">{{address}}</p>
+                    <p class="text-main"><i class="fa fa-map-marker fa-2x"></i></p>
+                    <p class="mx-3 mb-5 mt-2">{{address}}</p>
 
                 </div>
             </div>
@@ -44,21 +46,108 @@
         
     </div>
 
-    
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
 
-        {% for service in services %}
+        <div class="col-lg-10 col-md-10 col-sm-12">
 
-        {% include 'blog/services-component.html' %}
+            <div class="card">
 
-        {% endfor %}
+                <div class="card-body">
 
+                    <h2 class="text-center text-chocolate mb-3">Send me a message</h3>
+
+
+                    <form id="contactForm">
+
+
+                        <div class="form-group">
+        
+                            <label for="fname">Name:*</label>
+                            <input type="text" required class="form-control"  placeholder="Enter first name">
+        
+                        </div>
+        
+                        <div class="form-group">
+               
+                            <label for="email">Email:*</label>
+                            <input type="email" required class="form-control" name="email"  id="email" placeholder="Your email">
+                            
+                        </div>
 
         
-    </div>
+                        <div class="form-group">
+        
+                            <label for="password">Message:*</label>
+                            <textarea class="form-control" required name="password" id="password" placeholder="I need help launching a blog site of my own..."></textarea>
+        
+                        </div>
+        
+        
+                        <div class="form-check">
+        
+                            <input type="checkbox" class="form-check-input" name="checkmeout" id="check">
+                            <label for="check">Check Me</label>
+        
+                        </div>
+                        
+                        <div class="row justify-content-center">
+                            <button type="submit" class="btn btn-main w-50">Submit</button>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+
+
 
 
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="thanksModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <!-- <h3 class="text-black ">Much Appreciation</h3> -->
+                    <img src="{% static 'images/thankyou.svg' %}" class="img-fluid px-5">
+                    <h4 class="mt-2">Thank you for your message.</h4>
+                    <p>We will reach out to you as soon as we can. Cheers</p>
+
+                    <button class="btn btn-main  w-50" type="button">Okay</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}
+
+{% block 'scripts' %}
+
+<script>
+
+    $(document).ready(function(){
+
+        $("#contactForm").on('submit', function(e){
+
+            e.preventDefault();
+            console.log("Prevented");
+
+            $("#thanksModal").modal("show");
+
+        });
+        
+
+    });
+</script>
 
 
 
