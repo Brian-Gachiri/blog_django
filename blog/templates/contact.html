@@ -59,26 +59,35 @@
 
                     <form id="contactForm">
 
+                        {% csrf_token %}
+
 
                         <div class="form-group">
         
                             <label for="fname">Name:*</label>
-                            <input type="text" required class="form-control"  placeholder="Enter first name">
+                            <input type="text" required name="name" class="form-control"  placeholder="Enter first name">
         
                         </div>
         
                         <div class="form-group">
                
-                            <label for="email">Email:*</label>
-                            <input type="email" required class="form-control" name="email"  id="email" placeholder="Your email">
+                            <label for="email">Email: (optional)</label>
+                            <input type="email"  class="form-control" name="email"  id="email" placeholder="Your email">
+                            
+                        </div>
+
+                        <div class="form-group">
+               
+                            <label for="email">Phone Number: (optional)</label>
+                            <input type="number"  class="form-control" name="number"  id="number" placeholder="Your phone number">
                             
                         </div>
 
         
                         <div class="form-group">
         
-                            <label for="password">Message:*</label>
-                            <textarea class="form-control" required name="password" id="password" placeholder="I need help launching a blog site of my own..."></textarea>
+                            <label for="message">Message:*</label>
+                            <textarea class="form-control" required name="message" id="password" placeholder="I need help launching a blog site of my own..."></textarea>
         
                         </div>
         
@@ -86,7 +95,7 @@
                         <div class="form-check">
         
                             <input type="checkbox" class="form-check-input" name="checkmeout" id="check">
-                            <label for="check">Check Me</label>
+                            <label for="check">Subscribe to notifications</label>
         
                         </div>
                         
@@ -118,13 +127,33 @@
                     <h4 class="mt-2">Thank you for your message.</h4>
                     <p>We will reach out to you as soon as we can. Cheers</p>
 
-                    <button class="btn btn-main  w-50" type="button">Okay</button>
+                    <button class="btn btn-main  w-50" data-dismiss="modal" aria-label="Close" type="button">Okay</button>
                 </div>
             </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 text-center">
+                    <!-- <h3 class="text-black ">Much Appreciation</h3> -->
+                    <img src="{% static 'images/thankyou.svg' %}" class="img-fluid px-5">
+                    <h4 class="mt-2">it's not you, it's us.</h4>
+                    <p>Sorry, we encountered an error. Please try again later</p>
+
+                    <button class="btn btn-main  w-50" data-dismiss="modal" aria-label="Close" type="button">Okay</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -136,12 +165,39 @@
 
     $(document).ready(function(){
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRFToken': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
         $("#contactForm").on('submit', function(e){
 
             e.preventDefault();
-            console.log("Prevented");
 
-            $("#thanksModal").modal("show");
+            $.ajax({
+                type : 'POST',
+                url : "{% url 'save_feedback' %}",
+                dataType : 'json',
+                data :  $("#contactForm").serialize(),
+                success : function(data){
+                    // $("#thanksModal").modal("show");
+                    $("#thanksModal").modal("show");
+                    $("#contactForm").trigger('reset')
+
+
+                },
+                error: function(data){
+
+                    $("#errorModal").modal("show");
+                    console.log(data)
+
+                }
+                
+            });
+
+
+
 
         });
         

@@ -1,0 +1,6 @@
+{% extends 'blog/base.html' %}
+
+{% block 'content' %}
+  <p>Logged out!</p>
+  <a class="btn btn-main" href="{% url 'login'%}">Click here to login again.</a>
+{% endblock %}

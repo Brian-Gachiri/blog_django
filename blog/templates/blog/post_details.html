@@ -1,0 +1,121 @@
+{% extends 'blog/base.html' %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% block 'css' %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+{% endblock %}
+
+{% block 'content' %}
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-12 my-3">
+            <img src="{{post.image_url.url}}" class="rounded" style="height:200px; width: 100%; object-fit: cover;">
+        </div>
+
+        <div class="col-lg-8 col-md-12 col-sm-12">
+            <h3 class="">{{post.title}}</h3>
+            <p class="text-main"><i class="fa fa-tag mr-2"></i>{{post.category}}</p>
+
+            <p class="my-5">{{post.message}}</p>
+        </div>
+
+        <div class="col-lg-4 d-lg-block d-none">
+            <div class="card">
+                <div class="card-header">
+                    <h5>More Categories</h5>
+
+                </div>
+                <div class="card-body">
+                    
+                    {% for category in categories %}
+
+                        <a href="{% url 'category_posts' category.id %}">{{category}}</a>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 my-5">
+            <h5>Comments</h5>
+            <hr>
+
+            {% if not comments %}
+
+                <h5 class="text-center">Be the first to add a comment :)</h5>
+                <img src="{% static 'images/landing.svg' %}" class="img-fluid px-5">
+
+            {% else %}
+
+                {% for comment in comments %}
+                    <h6 class="text-main"><i class="fa fa-users mr-2"></i>{{comment.user}}</h6>
+                    <p>{{comment.message}}</p>
+                    <small>{{comment.created_at}}</small>
+                    <hr>
+                {% endfor %}
+
+            {% endif %}
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 my-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5>We'd like to hear your thoughts about this</h5>
+                    <form action="{% url 'save_comment' post.id %}" method="POST">
+
+                        {% csrf_token %}
+
+                        {% for hidden in commentForm.hidden_fields %}
+
+                        {{ hidden }}
+
+                        {% endfor %}
+
+                        {% for field in commentForm.visible_fields %}
+
+                            <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                                {{ field|add_class:'form-control ' }}
+                                
+                                {% for error in field.errors %}
+                                    <span class="help-block">{{ error }}</span>
+                                {% endfor %}
+
+                            </div>
+
+                        {% endfor %}
+
+
+                        <button type="submit" class="btn btn-main w-100 px-5">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-5 mb-3">Related Posts</h4>
+    <div class="row mb-5">
+
+        {% include 'blog/simple-post.html' %}
+
+    </div>
+
+
+
+</div>
+
+
+
+{% endblock %}
+
+

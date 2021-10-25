@@ -1,0 +1,100 @@
+{% extends 'blog/admin/layouts/admin-base.html' %}
+
+{% load static%}
+
+{% block 'content' %}
+
+<div class="container">
+
+
+    <div class="row mt-5">
+
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <h3 class="">{{post.title}}</h3>
+            <p class="text-main"><i class="fa fa-tag mr-2"></i>{{post.category}}</p>
+        </div>
+
+        <div class="col-lg-4 col-md-4 col-sm-12 mt-3">
+            <a href="{% url 'update_post' post.id %}" class="btn btn-main btn-sm"><i class="fa fa-edit mr-2"></i> Update</a>
+            <a href="#" class="btn btn-sec btn-sm"><i class="fa fa-trash mr-2"></i> Delete</a>
+
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <img src="{{post.image_url.url}}" class="img-fluid">
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h5 class="text-center">Title: {{post.title}}</h5>
+                    <p>Category: {{post.category}}</p>
+                    <p>Likes: {{post.likes}}</p>
+                    <p>Dislikes {{post.dislikes}}</p>
+                    <p>Views {{post.views}}</p>
+                </div>
+
+                <div class="card-footer">
+                    <p>Author: {{post.user}}</p>
+                    <p>Created at: {{post.created_at}}</p>
+                </div>
+                    
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="card">
+                <div class="card-header">
+                   <h5>Post</h5>
+                </div>
+                <div class="card-body">
+                    <p>{{post.message}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-2">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Keywords</h4>
+                </div>
+                <div class="card-body">
+                    <p>{{post.keywords}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 mt-4">
+            <h5>Comments</h5>
+            <hr>
+
+            {% if not comments %}
+
+               <div class="row justify-content-center mb-5">
+                   <div class="col-lg-6">
+                    <h5 class="text-center">No comments on this post yet :(</h5>
+                    <img src="{% static 'images/landing.svg' %}" class="img-fluid px-5">
+                   </div>
+               </div>
+
+            {% else %}
+
+                {% for comment in comments %}
+                    <h6 class="text-main"><i class="fa fa-users mr-2"></i>{{comment.user}}</h6>
+                    <p>{{comment.message}}</p>
+                    <small>{{comment.created_at}}</small>
+                    <hr>
+                {% endfor %}
+
+            {% endif %}
+        </div>
+
+    </div>
+
+    
+</div>
+
+
+
+{% endblock %}

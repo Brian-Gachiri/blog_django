@@ -3,13 +3,15 @@
         <div class="col-lg-4 col-md-4 col-sm-12">
             <div class="card mt-2">
 
+                <img class="card-img-top" src="{{post.image_url.url}}" style="max-height:200px; object-fit: cover;">
+
                 <div class="card-body">
 
-                    <p class="text-center text-secondary my-4"><i class="fa fa-picture-o fa-3x"></i></p>
 
-                    <h4>{{post}}</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint voluptas sunt velit beatae laudantium. Iusto cupiditate asperiores aliquid molestiae tenetur veniam beatae.</p>
-                
+                    <h4>{{post.title}}</h4>
+                    <p class="my-2">{{post.message | truncatewords:15}}</p>
+                    
+                    <a href="{% url 'post_details' post.id %}" class="btn btn-main btn-sm w-100">Read More</a>
                 </div>
                 
             </div>

@@ -5,7 +5,12 @@
 {% block 'css' %}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+    a{
+        text-decoration: none;
 
+    }
+</style>
 {% endblock %}
 
 {% block 'content' %}
@@ -39,13 +44,15 @@
         {% for service in services %}
 
         <div class="col-lg-4 col-md-4 col-sm-12">
+           <a href="{% url 'category_posts' service.id %}">
             <div class="card bg-black  mt-1">
                 <div class="card-body text-center text-light">
                     <p class="text-main"><i class="fa fa-ravelry fa-2x"></i></p>
-                    <p class="mx-5 mt-2">{{service}}</p>
+                    <p class="mx-5 mt-2">{{service.name}}</p>
         
                 </div>
             </div>
+           </a>
         </div>
 
         {% endfor %}
@@ -55,7 +62,7 @@
 
     <h3 class="text-center mt-5">Recent Posts</h3>
 
-    <div class="row a">
+    <div class="row my-5">
 
         
         {% include 'blog/simple-post.html' %}
@@ -68,6 +75,57 @@
 </div>
 
 
+<div id="cookieDiv" class="d-none" style="width: 30vw; position: fixed; bottom: 0; left: 0;">
+
+    <div class="card bg-main text-light m-2">
+        <div class="card-body text-center">
+
+            <img src="{% static 'images/cookies.svg'%}" class="img-fluid w-25" >
+            <h4>This site uses cookies</h4>
+            <p>To help us provide a pleasant and useful experience to you, we use cookies.</p>
+
+            <div class="row justify-content-center">
+                <button type="button" id="cancelCookies" class="btn btn-outline-light border-0">Cancel</button>
+                <button type="button" id="acceptCookies" class="btn btn-light mx-2">Accept Cookies</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block 'scripts' %}
+
+<script>
+
+    $(document).ready(function(){
+
+        $("#cancelCookies").click(function(){
+
+            $("#cookieDiv").addClass("d-none");
+        });
+
+        $("#acceptCookies").click(function(){
+
+            $("#cookieDiv").addClass("d-none");
+        });
+
+        var num_of_visits = '{{num_of_visits}}';
+        console.log(num_of_visits);
+
+        if(num_of_visits != "0"){
+
+            $("#cookieDiv").removeClass("d-none");
+
+        }
+
+
+
+    });
+
+</script>
 
 {% endblock %}
 
