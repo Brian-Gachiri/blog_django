@@ -58,7 +58,12 @@
         });
 
     $("#search").blur(function(){
-      $("#options").html("");
+
+      setTimeout(function(){
+
+        $("#options").html("");
+
+      }, 1000)
 
     })
 
